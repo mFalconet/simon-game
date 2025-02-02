@@ -1,0 +1,196 @@
+body {
+  text-align: center;
+  background-color: #232323;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+}
+
+header {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings {
+  color: whitesmoke;
+}
+
+.set-btn {
+  background-color: #00000000;
+  border: none;
+  font-family: "Press Start 2P", cursive;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: medium;
+}
+
+.setting-box {
+  background-color: #302f2f;
+  color: whitesmoke;
+  border: 2px solid whitesmoke;
+  padding: 0 5px 0 10px;
+  margin-right: 5px;
+
+  text-align: end;
+
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 900;
+}
+
+.setting-value {
+  color: orange;
+}
+
+.hard {
+  color: orangered;
+}
+
+.score {
+  color: yellow;
+}
+
+#level-title {
+  font-size: 3rem;
+  margin: 3rem;
+  color: greenyellow;
+}
+
+.enter {
+  color: fuchsia;
+}
+
+.lv {
+  color: fuchsia;
+}
+
+/* .container {
+  display: block;
+  width: 50%;
+  margin: auto;
+} */
+
+/* .game-box {
+  border: 2px solid whitesmoke;
+  background-color: #232323;
+  box-shadow: 0 0 20px black;
+} */
+
+.game-box {
+  padding-top: 3rem;
+}
+
+.btn {
+  margin: 25px;
+  display: inline-block;
+  height: 10rem;
+  width: 10rem;
+  border: 10px solid #232323;
+  border-radius: 50%;
+  box-shadow: 0 0 30px black;
+}
+
+.green {
+  background-color: limegreen;
+  margin: 2rem 0 0 2rem;
+}
+
+.yellow {
+  background-color: yellow;
+  margin: 2rem 2rem 0 0;
+}
+
+.red {
+  background-color: orangered;
+  margin: 0 0 2rem 2rem;
+}
+
+.blue {
+  background-color: blue;
+  margin: 0 2rem 2rem 0;
+}
+
+.orange {
+  background-color: orange;
+  margin: 0 0 2rem 2rem;
+}
+.purple {
+  background-color: fuchsia;
+  margin: 0 2rem 2rem 0;
+}
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}
+
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.end-game-box {
+  font-size: 2rem;
+  margin: 10px;
+}
+
+.game-over-text {
+  font-size: 6rem;
+  color: orangered;
+  margin-top: 150px;
+  margin-bottom: 30px;
+}
+
+.restart {
+  color: whitesmoke;
+  width: 60%;
+  margin: 5rem auto;
+  font-size: 1.3rem;
+}
+
+.rst-btn {
+  font-size: 3rem;
+  margin: 10px 20px;
+}
+
+.yes {
+  color: greenyellow;
+}
+
+.no {
+  color: orangered;
+}
+
+.copyright {
+  color: grey;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+@media (max-width: 1074px) {
+  #level-title {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 786px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 630px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 497px) {
+  html {
+    font-size: 8px;
+  }
+}
