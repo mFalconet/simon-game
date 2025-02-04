@@ -1,0 +1,258 @@
+body {
+  min-height: 97vh;
+  text-align: center;
+  background-color: #232323;
+  color: whitesmoke;
+  font-family: "Press Start 2P", cursive;
+  text-transform: uppercase;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  color: whitesmoke;
+}
+
+.set-btn {
+  background-color: #00000000;
+  border: none;
+  font-family: "Press Start 2P", cursive;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.menu-box {
+  background-color: #302f2f;
+  border: 2px solid whitesmoke;
+  padding: 0 5px 0 10px;
+  margin-right: 5px;
+
+  text-align: start;
+
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 900;
+}
+
+.setting-value {
+  color: orange;
+}
+
+.hard {
+  color: orangered;
+}
+
+.score {
+  color: yellow;
+}
+
+.volume-checkbox {
+  accent-color: whitesmoke;
+  cursor: pointer;
+}
+
+#level-title {
+  font-size: 3rem;
+  /* margin: 3rem; */
+  color: greenyellow;
+}
+
+.enter {
+  color: fuchsia;
+}
+
+.lv {
+  color: fuchsia;
+}
+
+/* .container {
+  display: block;
+  width: 50%;
+  margin: auto;
+} */
+
+.start-btn {
+  margin: auto;
+  height: 20rem;
+  width: 20rem;
+  border: 10px solid #232323;
+  border-radius: 50%;
+  box-shadow: 0 0 30px black;
+  background-color: gray;
+  font-size: 3rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  margin: 25px;
+  display: inline-block;
+  height: 10rem;
+  width: 10rem;
+  border: 10px solid #232323;
+  border-radius: 50%;
+  box-shadow: 0 0 30px black;
+  cursor: pointer;
+}
+
+.green {
+  background-color: limegreen;
+  margin: 2rem 0 0 2rem;
+}
+
+.yellow {
+  background-color: yellow;
+  margin: 2rem 2rem 0 0;
+}
+
+.red {
+  background-color: orangered;
+  margin: 0 0 2rem 2rem;
+}
+
+.blue {
+  background-color: blue;
+  margin: 0 2 rem 2rem 0;
+}
+
+.orange {
+  background-color: orange;
+  margin: 0 0 2rem 2rem;
+}
+.purple {
+  background-color: fuchsia;
+  margin: 0 2rem 2rem 0;
+}
+
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}
+
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.end-game-box {
+  font-size: 2rem;
+  margin: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.retry-box {
+  margin-top: 6%;
+  font-size: 3rem;
+}
+
+.retry-btn {
+  color: whitesmoke;
+  font-size: 3.5rem;
+}
+
+.game-over-text {
+  font-size: 6rem;
+  color: orangered;
+  margin-bottom: 4%;
+}
+
+.restart.box {
+  width: 60%;
+  margin: 5rem auto;
+  font-size: 1.3rem;
+}
+
+.rst-btn {
+  font-size: 3rem;
+  margin: 10px 20px;
+}
+
+.yes {
+  color: greenyellow;
+}
+
+.no {
+  color: orangered;
+}
+
+.rules-box {
+  width: 80%;
+  margin: auto;
+  text-align: left;
+
+  background-color: #302f2f;
+  border: 2px solid whitesmoke;
+  padding: 10px;
+}
+
+.rules-box h2,
+.rules-box h3,
+.rules-box p {
+  text-align: center;
+}
+
+.rules-box ul {
+  list-style-position: inside;
+}
+
+.rules-box li {
+  padding-top: 5px;
+  margin-left: 10px;
+}
+
+.rules-box .back {
+  text-align: end;
+  margin-top: 25px;
+}
+
+.rules-box .back .set-btn {
+  color: gray;
+}
+
+.copyright {
+  color: grey;
+  font-size: 0.8rem;
+  text-align: end;
+}
+
+@media (max-width: 1074px) {
+  #level-title {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 786px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 630px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 497px) {
+  html {
+    font-size: 8px;
+  }
+}
