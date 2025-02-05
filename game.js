@@ -43,13 +43,14 @@ $(document).click(function (e) {
 //toggle the game rules
 $(".rules-btn").click(function () {
   if (started === true) {
-    $(".menu-box").slideUp();
     $(".rules-box").slideDown();
+    $(".menu-box").slideUp();
     $(".game-box").slideUp();
   } else {
-    $(".menu-box").slideUp();
     $(".rules-box").slideDown();
+    $(".menu-box").slideUp();
     $(".start-box").slideUp();
+    $(".end-game-box").slideUp();
   }
 });
 $(".back").click(function () {
@@ -117,7 +118,7 @@ function restartGame() {
   started = false;
   level = 0;
 
-  $(".game-box").slideDown();
+  $(".start-box").slideDown();
   $(".restart-box").slideUp();
 
   $("#level-title").html("Press <span class='enter'>Enter</span> to Start");
@@ -176,6 +177,7 @@ function startGame() {
   $("#level-title").css("opacity", "100");
 
   $(".game-box").slideDown(100);
+  $("#level-title").show();
   $(".start-box").hide();
   $(".rules-box").slideUp();
 
@@ -228,19 +230,19 @@ $(".btn").click(function (evt) {
     userClickedPattern.push(userChosenColor);
 
     animatePress(userChosenColor);
-    playSound(userChosenColor);
 
-    checkAnswer(userClickedPattern.length - 1);
+    checkAnswer(userClickedPattern.length - 1, userChosenColor);
   }
 });
 
 // check answers, game over on wrong sequence
-function checkAnswer(currentLevel) {
+function checkAnswer(currentLevel, userChosenColor) {
   if (userClickedPattern[currentLevel] != gamePattern[currentLevel]) {
     gameOver();
     return;
   }
 
+  playSound(userChosenColor);
   if (userClickedPattern.length === gamePattern.length) {
     userClickedPattern = [];
 
