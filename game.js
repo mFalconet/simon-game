@@ -1,76 +1,101 @@
 // define all main variables
 
-var difficulty = "Normal";
-var volumeLevel = 0.99;
+let difficulty = "Normal";
+let volumeLevel = 0.99;
 
-var buttonColors = ["red", "blue", "green", "yellow"];
-var randomMultiplier = 4;
+const buttonColors = ["red", "blue", "green", "yellow"];
+let randomMultiplier = 4;
 
-var gamePattern = [];
-var userClickedPattern = [];
+let gamePattern = [];
+let userClickedPattern = [];
 
-var started = false;
-var level = 0;
-var highScore = 0;
+let started = false;
+let level = 0;
+let highScore = 0;
 
 // const highScore = localStorage.getItem(highScore);
 // $(".best-score").text(highScore);
 
+// pre-load audio files
+const audioFiles = {
+  red: new Audio("sounds/red.mp3"),
+  blue: new Audio("sounds/blue.mp3"),
+  green: new Audio("sounds/green.mp3"),
+  yellow: new Audio("sounds/yellow.mp3"),
+  orange: new Audio("sounds/orange.mp3"),
+  purple: new Audio("sounds/purple.mp3"),
+  wrong: new Audio("sounds/wrong.mp3"),
+  beep: new Audio("sounds/beep.mp3"),
+};
+
+// catch recurrent jQuery selectors by storing them in a variable
+const $startBox = $(".start-box");
+const $gameBox = $(".game-box");
+const $endGameBox = $(".end-game-box");
+const $menu = $(".menu");
+const $menuBox = $(".menu-box");
+const $volumeValue = $(".volume-value");
+const $difficultyValue = $(".difficulty-value");
+const $dHard = $(".d-hard");
+const $restartBox = $(".restart-box");
+const $rulesBox = $(".rules-box");
+const $levelTitle = $("#level-title");
+
 //when the page is open hide content to pop up in the future
-$(".game-box").hide();
-$(".end-game-box").hide();
-$(".menu-box").hide();
-$(".d-hard").hide();
-$(".restart-box").hide();
-$(".rules-box").hide();
+$gameBox.hide();
+$endGameBox.hide();
+$menuBox.hide();
+$dHard.hide();
+$restartBox.hide();
+$rulesBox.hide();
 
 // make the title blink until enter key is pressed
 let intervalId;
 intervalId = setInterval(blinkTitle, 1300);
 
 //show the menu box on "menu" click
-$(".menu").click(function () {
-  $(".menu-box").slideToggle();
+$menu.click(function () {
+  $menuBox.slideToggle();
 });
 
 // toggle the menu box for any click outside the menu box
 $(document).click(function (e) {
   if (e.target.classList[0] != "set-toggle") {
-    $(".menu-box").slideUp();
+    $menuBox.slideUp();
   }
 });
 
 //toggle the game rules
 $(".rules-btn").click(function () {
   if (started === true) {
-    $(".rules-box").slideDown();
-    $(".menu-box").slideUp();
-    $(".game-box").slideUp();
+    $rulesBox.slideDown();
+    $menuBox.slideUp();
+    $gameBox.slideUp();
   } else {
-    $(".rules-box").slideDown();
-    $(".menu-box").slideUp();
-    $(".start-box").slideUp();
-    $(".end-game-box").slideUp();
+    $rulesBox.slideDown();
+    $menuBox.slideUp();
+    $startBox.slideUp();
+    $endGameBox.slideUp();
   }
 });
 $(".back").click(function () {
   if (started === true) {
-    $(".game-box").slideDown();
-    $(".rules-box").slideUp();
+    $gameBox.slideDown();
+    $rulesBox.slideUp();
   } else {
-    $(".start-box").slideDown();
-    $(".rules-box").slideUp();
+    $startBox.slideDown();
+    $rulesBox.slideUp();
   }
 });
 
 // DIFFICULTY SETTING
 // 1st check if the game already started.
 // If so it will hide the game and prompt the user to abort and restart the game with the new difficulty
-$(".difficulty-value").click(function () {
+$difficultyValue.click(function () {
   if (started === true) {
-    $(".menu-box").slideUp();
-    $(".game-box").slideUp();
-    $(".restart-box").slideDown();
+    $menuBox.slideUp();
+    $gameBox.slideUp();
+    $restartBox.slideDown();
 
     $(".yes").click(function () {
       console.log("Yes selected");
@@ -80,8 +105,8 @@ $(".difficulty-value").click(function () {
 
     $(".no").click(function () {
       console.log("No selected");
-      $(".game-box").slideDown();
-      $(".restart-box").slideUp();
+      $gameBox.slideDown();
+      $restartBox.slideUp();
     });
   } else {
     changeDifficulty();
@@ -91,22 +116,22 @@ $(".difficulty-value").click(function () {
 // 2nd check the current difficulty and swap between Normal and Hard
 function changeDifficulty() {
   if (difficulty === "Normal") {
-    $(".difficulty-value").text("Hard");
-    $(".difficulty-value").addClass("hard");
+    $difficultyValue.text("Hard");
+    $difficultyValue.addClass("hard");
     difficulty = "Hard";
-    $(".d-hard").fadeIn();
+    $dHard.fadeIn();
     console.log("Change diffifulty to hard");
 
     buttonColors.push("orange", "purple");
     randomMultiplier = 6;
   } else {
-    $(".difficulty-value").text("Normal");
-    $(".difficulty-value").removeClass("hard");
+    $difficultyValue.text("Normal");
+    $difficultyValue.removeClass("hard");
     difficulty = "Normal";
-    $(".d-hard").fadeOut();
+    $dHard.fadeOut();
     console.log("Change diffifulty to normal");
 
-    buttonColors = ["red", "blue", "green", "yellow"];
+    buttonColors.length = 4;
     randomMultiplier = 4;
   }
 }
@@ -118,10 +143,10 @@ function restartGame() {
   started = false;
   level = 0;
 
-  $(".start-box").slideDown();
-  $(".restart-box").slideUp();
+  $startBox.slideDown();
+  $restartBox.slideUp();
 
-  $("#level-title").html("Press <span class='enter'>Enter</span> to Start");
+  $levelTitle.html("Press <span class='enter'>Enter</span> to Start");
   intervalId = setInterval(blinkTitle, 1300);
 
   console.log("Game restarted");
@@ -132,22 +157,22 @@ function restartGame() {
 $(".volume-checkbox").click(function (e) {
   if (e.target.checked === false) {
     volumeLevel = 0;
-    $(".volume-value").css("color", "gray");
+    $volumeValue.css("color", "gray");
   } else {
-    volumeLevel = $(".volume-value").val() / 100;
-    $(".volume-value").css("color", "orange");
+    volumeLevel = $volumeValue.val() / 100;
+    $volumeValue.css("color", "orange");
   }
 });
 
 // set volume based on the specified value both on clicks and enter press
-$(".volume-value").click(function () {
-  volumeLevel = $(".volume-value").val() / 100;
+$volumeValue.click(function () {
+  volumeLevel = $volumeValue.val() / 100;
 });
-$(".volume-value").keypress(function () {
-  volumeLevel = $(".volume-value").val() / 100;
+$volumeValue.keypress(function () {
+  volumeLevel = $volumeValue.val() / 100;
   if (volumeLevel > 1) {
     volumeLevel = 1;
-    $(".volume-value").val(100);
+    $volumeValue.val(100);
   }
 });
 
@@ -174,29 +199,29 @@ $(".start-btn").click(function () {
 // stop the title blinking, hide/display relevat boxes, intitate countdown and then start rendom sequence generation
 function startGame() {
   stopBlinking();
-  $("#level-title").css("opacity", "100");
+  $levelTitle.css("opacity", "100");
 
-  $(".game-box").slideDown(100);
-  $("#level-title").show();
-  $(".start-box").hide();
-  $(".rules-box").slideUp();
+  $gameBox.slideDown(100);
+  $levelTitle.show();
+  $startBox.hide();
+  $rulesBox.slideUp();
 
   //3
-  $("#level-title").html("<span class='lv'>3</span>");
+  $levelTitle.html("<span class='lv'>3</span>");
   playSound("beep");
   //2
   setTimeout(function () {
-    $("#level-title").html("<span class='lv'>2</span>");
+    $levelTitle.html("<span class='lv'>2</span>");
     playSound("beep");
   }, 1000);
   //1
   setTimeout(function () {
-    $("#level-title").html("<span class='lv'>1</span>");
+    $levelTitle.html("<span class='lv'>1</span>");
     playSound("beep");
   }, 2000);
 
   setTimeout(function () {
-    $("#level-title").html("Level <span class='lv'>" + (level + 1) + "</span>");
+    $levelTitle.html("Level <span class='lv'>" + (level + 1) + "</span>");
     started = true;
     nextSequence();
   }, 3200);
@@ -205,7 +230,7 @@ function startGame() {
 // generate the random color sequence
 function nextSequence() {
   level++;
-  $("#level-title").html("Level <span class='lv'>" + level + "</span>");
+  $levelTitle.html("Level <span class='lv'>" + level + "</span>");
 
   var randomNumber = Math.floor(Math.random() * randomMultiplier);
   var randomChosenColor = buttonColors[randomNumber];
@@ -220,7 +245,7 @@ function nextSequence() {
 }
 
 // check the buttons clicked by the user
-$(".btn").click(function (evt) {
+$gameBox.on("click", ".btn", function (evt) {
   if (started === false) {
     var userChosenColor = evt.target.id;
     animatePress(userChosenColor);
@@ -270,9 +295,9 @@ function gameOver() {
 
   $(".current-score").text(level);
 
-  $("#level-title").hide();
-  $(".game-box").slideUp();
-  $(".end-game-box").slideDown();
+  $levelTitle.hide();
+  $gameBox.slideUp();
+  $endGameBox.slideDown();
 
   gamePattern = [];
   userClickedPattern = [];
@@ -282,19 +307,19 @@ function gameOver() {
 
 //return to home page after losing a game and click on retry
 $(".retry-btn").click(function () {
-  $("#level-title").html("Press <span class='enter'>Enter</span> to Start");
+  $levelTitle.html("Press <span class='enter'>Enter</span> to Start");
   intervalId = setInterval(blinkTitle, 1300);
-  $(".end-game-box").hide();
-  $("#level-title").show();
-  $(".start-box").slideDown();
+  $endGameBox.hide();
+  $levelTitle.show();
+  $startBox.slideDown();
 });
 
 //UTILITY FUNCTIONS
 
 // set the blinking functions
 function blinkTitle() {
-  $("#level-title").animate({ opacity: "0" }, "slow");
-  $("#level-title").animate({ opacity: "100" }, "slow");
+  $levelTitle.animate({ opacity: "0" }, "slow");
+  $levelTitle.animate({ opacity: "100" }, "slow");
 }
 function stopBlinking() {
   clearInterval(intervalId);
@@ -311,10 +336,12 @@ function animatePress(currentColour) {
 
 // play related sound
 function playSound(color) {
-  var audio = new Audio("sounds/" + color + ".mp3");
-  audio.volume = volumeLevel;
-  if (color == "wrong") {
-    audio.volume = 0.2 * volumeLevel;
+  if (audioFiles[color]) {
+    audioFiles[color].volume = volumeLevel;
+    if (color == "wrong") {
+      audioFiles[color].volume = 0.4 * volumeLevel;
+    }
+    audioFiles[color].currentTime = 0; // Reset the audio to start
+    audioFiles[color].play();
   }
-  audio.play();
 }
